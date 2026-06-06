@@ -348,7 +348,7 @@ func Sliding[T any](collection iter.Seq[T], size, step int) iter.Seq[[]T] {
 					if !yield(append(make([]T, 0, size), buffer...)) {
 						return
 					}
-					count = size - 1
+					count = 0
 				}
 			}
 
@@ -360,7 +360,7 @@ func Sliding[T any](collection iter.Seq[T], size, step int) iter.Seq[[]T] {
 						return
 					}
 					count -= step
-					copy(buffer, buffer[step-1:])
+					copy(buffer, buffer[step:])
 				}
 			}
 
@@ -378,7 +378,7 @@ func Sliding[T any](collection iter.Seq[T], size, step int) iter.Seq[[]T] {
 						return
 					}
 					count = 0
-					skip = offset - 1
+					skip = offset
 				}
 			}
 		}
