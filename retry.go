@@ -23,10 +23,14 @@ func (d *debounce) reset() {
 		return
 	}
 
+	if d.timer != nil {
+		d.timer.Stop()
+	}
+
 	d.timer = time.AfterFunc(d.after, func() {
 		// We need to lock the mutex here to avoid race conditions with 2 concurrent calls to reset()
 		d.mu.Lock()
-		callbacks := d.callbacks
+		callbacks := append([]func(){}, d.callbacks...)
 		d.mu.Unlock()
 
 		for i := range callbacks {
