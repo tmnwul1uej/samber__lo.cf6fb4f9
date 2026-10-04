@@ -136,7 +136,7 @@ func substring[T ~string](str T, offset int, length uint) T {
 		}
 
 		// If couldn't skip enough runes - string is shorter than offset
-		if offset < 0 {
+		if offset != 0 {
 			return ""
 		}
 
@@ -152,7 +152,7 @@ func substring[T ~string](str T, offset int, length uint) T {
 	case offset < -len(str), offset == 0:
 		// Count length runes from the start
 		for i := range str {
-			if length == 1 {
+			if length == 0 {
 				return str[:i]
 			}
 			length--
@@ -177,7 +177,7 @@ func substring[T ~string](str T, offset int, length uint) T {
 		offset := uint(-offset)
 
 		// If offset is less than or equal to length - take from position to end
-		if offset < length {
+		if offset <= length {
 			start := backwardPos(len(str), offset)
 			return str[start:]
 		}
