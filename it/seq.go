@@ -998,7 +998,7 @@ func Splice[T any, I ~func(func(T) bool)](collection I, index int, elements ...T
 // Play: https://go.dev/play/p/2TnGK6-zs
 func CutPrefix[T comparable, I ~func(func(T) bool)](collection I, separator []T) (after I, found bool) { //nolint:gocyclo
 	if len(separator) == 0 {
-		return collection, false
+		return collection, true
 	}
 
 	next, stop := iter.Pull(iter.Seq[T](collection))
@@ -1007,7 +1007,7 @@ func CutPrefix[T comparable, I ~func(func(T) bool)](collection I, separator []T)
 		if !ok {
 			return func(yield func(T) bool) {
 				defer stop()
-				for j := range i + 1 {
+				for j := range i {
 					if !yield(separator[j]) {
 						return
 					}
@@ -1023,7 +1023,7 @@ func CutPrefix[T comparable, I ~func(func(T) bool)](collection I, separator []T)
 						return
 					}
 				}
-				if ok && !yield(separator[i]) {
+				if ok && !yield(item) {
 					return
 				}
 				for {
@@ -1037,7 +1037,6 @@ func CutPrefix[T comparable, I ~func(func(T) bool)](collection I, separator []T)
 
 	return func(yield func(T) bool) {
 		defer stop()
-		next()
 		for {
 			if item, ok := next(); !ok || !yield(item) {
 				return
